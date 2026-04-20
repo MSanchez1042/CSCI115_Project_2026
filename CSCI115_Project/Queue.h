@@ -4,11 +4,13 @@
 #include <iostream>
 using namespace std;
 
-struct Node {
+struct Node 
+{
     int data;
     Node* next;
 
-    Node(int value) {
+    Node(int value) 
+    {
         data = value;
         next = nullptr;
     }
