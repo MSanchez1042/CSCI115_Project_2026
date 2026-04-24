@@ -2,6 +2,7 @@
 #define GRAPH_H
 
 #include "Queue.h"
+#include "PriorityQueue.h"
 
 struct Edge
 {
@@ -20,7 +21,7 @@ struct Edge
 class Graph
 {
 public:
-	Graph(int, bool, bool);
+	Graph(int v, bool isWeighted, bool isDirected);
 	~Graph();
 
 	bool weighted;
@@ -29,6 +30,10 @@ public:
 	bool edgeExists(int, int);
 	void addEdge(int, int, double);
 	void removeEdge(int, int);
+
+	bool isConnected(int);
+
+	void BFS(int);
 
 	void displayAdjList();
 

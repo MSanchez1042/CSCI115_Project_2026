@@ -136,6 +136,100 @@ void Graph::removeEdge(int v1, int v2)
 	}
 }
 
+bool Graph::isConnected(int source)
+{
+	if (vertices == 0)
+		return true; // technically true
+
+	bool* visited = new bool[vertices];
+	for (int i = 0; i < vertices; i++)
+		visited[i] = false;
+
+	Queue q;
+	visited[source] = true;
+	q.enqueue(source);
+
+	while (!q.isEmpty())
+	{
+		int current = q.dequeue();
+
+		Edge* currEdge = adj[current];
+		while (currEdge != nullptr)
+		{
+			int neighor = currEdge->to;
+
+			if (!visited[neighor])
+			{
+				visited[neighor] = true;
+				q.enqueue(neighor);
+			}
+
+			currEdge = currEdge->next;
+
+		}
+	}
+
+	for (int i = 0; i < vertices; i++)
+	{
+		if (visited[i] == false)
+		{
+			delete[] visited;
+			return false;
+		}
+	}
+	delete[] visited;
+	return true;
+}
+
+void Graph::BFS(int source)
+{
+	if (source < 0 || source >= vertices)
+	{
+		cerr << "Invalid source" << endl;
+		return;
+	}
+
+	// create visited array
+	bool* visited = new bool[vertices];
+	for (int i = 0; i < vertices; i++)
+		visited[i] = false;
+
+	// create queue
+	Queue Q;
+
+	// mark source and enqueue
+	visited[source] = true;
+	Q.enqueue(source);
+
+	// BFS loop
+	while (!Q.isEmpty())
+	{
+		int v = Q.dequeue();
+
+		// print vertex (convert to A, B, C...)
+		cout << v << " ";
+
+		// traverse adjacency list
+		Edge* curr = adj[v];
+		while (curr != nullptr)
+		{
+			int u = curr->to;
+
+			if (!visited[u])
+			{
+				visited[u] = true;
+				Q.enqueue(u);
+			}
+
+			curr = curr->next;
+		}
+	}
+
+	cout << endl;
+
+	delete[] visited;
+}
+
 void Graph::displayAdjList()
 {
 	for (int i = 0; i < vertices; i++)
