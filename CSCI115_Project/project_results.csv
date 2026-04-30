@@ -1,0 +1,10 @@
+graph_type,representation,algorithm,n,trials,mean_ms,stddev_ms
+Sparse Connected Undirected,Adjacency List,BFS,100,10,0.0840751,0.0144472
+Dense Fully Connected Undirected,Adjacency Matrix,BFS,100,10,0.105842,0.0065507
+Dense Fully Connected Directed,Adjacency Matrix,Dijkstra,100,10,0.161366,0.0059334
+Sparse Connected Undirected,Adjacency List,BFS,500,10,1.84688,0.0601053
+Dense Fully Connected Undirected,Adjacency Matrix,BFS,500,10,2.74996,0.664782
+Dense Fully Connected Directed,Adjacency Matrix,Dijkstra,500,10,3.71467,0.29085
+Sparse Connected Undirected,Adjacency List,BFS,1000,10,49.7486,6.83739
+Dense Fully Connected Undirected,Adjacency Matrix,BFS,1000,10,11.0413,2.44412
+Dense Fully Connected Directed,Adjacency Matrix,Dijkstra,1000,10,14.0166,0.356904

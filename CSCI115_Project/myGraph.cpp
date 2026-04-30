@@ -172,7 +172,6 @@ void myGraphM::BFS(int s) {
     int* d = new int[size];
     int* pi = new int[size];
     myQueue q;
-    std::cout << "=== BFS Start ===" << std::endl;
     //initialize the variables
     for (int u = 0; u < size; u++) {
         status[u] = color::white;
@@ -183,13 +182,10 @@ void myGraphM::BFS(int s) {
     status[s] = color::gray;
     d[s] = 0;
     pi[s] = -1;
-    std::cout << "Start at vertex: " << s << std::endl;
     q.enqueue(s);
     while (!q.isEmpty()) {
         int u = q.dequeue();
-        std::cout << "\nProcessing vertex: " << std::endl;
         for (int v = 0; v < size; v++) {
-            std::cout << "checking edge (" << u << "->" << v << ")";
             if (existEdge(u, v)) {
                 if (status[v] == color::white) {
                     status[v] = color::gray;
@@ -198,26 +194,18 @@ void myGraphM::BFS(int s) {
                     q.enqueue(v);
                 }
             }
-            std::cout << std::endl;
             if (existEdge(u, v) && status[v] == color::white) {
-                std::cout << " Vertex " << v << " is WHITE -> DISCOVERED" << std::endl;
                 
                 status[v] = color::gray;
                 d[v] = d[u] + 1;
                 pi[v] = u;
-                
-                std::cout << " Distance[" << v << "] = " << d[v] << std::endl;
-                std::cout << " Parent[" << v << "] = " << d[v] << std::endl;
-                
                 q.enqueue(v);
 
-                std::cout << " Enqueued " << v << std::endl;
             }
         }
         status[u] = color::black;
-        std::cout << "Finished vertex " << u << "(BLACK)" << std::endl;       
     }
-    std::cout << "\n=== BFS Complete ===" << std::endl;
+    std::cout << "\n=== BFS Complete ===\n";
     delete[] status;
     delete[] d;
     delete[] pi;
@@ -451,7 +439,7 @@ bool myGraphM::isConnected(int s, double* &d, int* &pi) {
                 q.enqueue(v);
             }
         }
-        status[u] == color::black; 
+        status[u] = color::black; 
     }
     delete[] status;
     return visitedCount == size;

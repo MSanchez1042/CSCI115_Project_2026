@@ -1,25 +1,58 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("algorithmDataLab05.csv")
+df = pd.read_csv("project_results.csv")
 
-cases = df["case"].unique()
+# ---------- Bar Chart: Mean Runtime with Standard Deviation ----------
 
-for case in cases:
-    plt.figure()
-    case_data = df[df["case"] == case]
-    algorithms = case_data["algorithm"].unique()
-    
-    for alg in algorithms:
-        alge_data = case_data[case_data["algorithm"] == alg]
-        alge_data = alge_data.sort_values("size")
-        plt.plot(alge_data["size"], alge_data["time_ms"], marker = 'o',label = alg)
+df["label"] = (
+    df["representation"] + "\n" +
+    df["algorithm"] + "\n" +
+    "n=" + df["n"].astype(str)
+)
 
-    plt.xscale("log")
-    plt.yscale("log")
-    plt.xlabel("input size")
-    plt.ylabel("time (ms)")
-    plt.title(f"Sorting Algorithm performance - {case}")
-    plt.legend()
-    plt.tight_layout()
-    plt.show()
+plt.figure(figsize=(12, 6))
+
+plt.bar(
+    df["label"],
+    df["mean_ms"],
+    yerr=df["stddev_ms"],
+    capsize=5
+)
+
+plt.ylabel("Mean Runtime (ms)")
+plt.xlabel("Graph Representation / Algorithm / Size")
+plt.title("Algorithm Runtime with Standard Deviation")
+plt.xticks(rotation=45, ha="right")
+plt.tight_layout()
+plt.savefig("runtime_bar_chart.png", dpi=300)
+plt.show()
+
+
+# ---------- Line Chart: Runtime Growth ----------
+
+groups = df.groupby(["representation", "algorithm", "graph_type"])
+
+plt.figure(figsize=(10, 6))
+
+for name, group in groups:
+    group = group.sort_values("n")
+
+    label = f"{name[0]} - {name[1]}"
+
+    plt.errorbar(
+        group["n"],
+        group["mean_ms"],
+        yerr=group["stddev_ms"],
+        marker="o",
+        capsize=5,
+        label=label
+    )
+
+plt.xlabel("Number of Vertices")
+plt.ylabel("Mean Runtime (ms)")
+plt.title("Runtime Growth by Algorithm and Graph Representation")
+plt.legend()
+plt.tight_layout()
+plt.savefig("runtime_growth.png", dpi=300)
+plt.show()

@@ -2,28 +2,24 @@
 #define BENCHMARK_H
 
 #include "myGraph.h"
-#include "myMatrix.h"
+#include "GraphAL.h"
 
-struct TestCase {
+struct BenchmarkStats {
+    const char* graphType;
+    const char* representation;
+    const char* algorithm;
     int n;
-    double p;
-    bool runFloyd;
+    int trials;
+    double meanMs;
+    double stdDevMs;
 };
 
-struct BenchmarkResult {
-    int n;
-    double p;
-    double floydTime;
-    double dijkstraTime;
-    double bfsTime;
-};
+void runProjectBenchmarks();
+void writeCSVHeader(const char* filename);
+void appendCSV(const char* filename, const BenchmarkStats& result);
 
-double timeFloydWarshall(myGraphM& g);
-double timeBFS(myGraphM& g);
-double timeRepeatedDijkstra(myGraphM& g);
-BenchmarkResult runBenchmark(int n, double p, bool runFloyd);
-void printBenchmarkResult(const BenchmarkResult& result);
-void runAllBenchmarks(const TestCase tests[], int count);
-void printHeader();
+BenchmarkStats benchmarkDenseMatrixBFS(int n, int trials);
+BenchmarkStats benchmarkDenseMatrixDijkstra(int n, int trials);
+BenchmarkStats benchmarkSparseListBFS(int n, int trials);
 
 #endif
