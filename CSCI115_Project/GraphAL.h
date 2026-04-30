@@ -1,5 +1,5 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+#ifndef GRAPH_AL_H
+#define GRAPH_AL_H
 
 #include "Queue.h"
 #include "PriorityQueue.h"
@@ -18,11 +18,11 @@ struct Edge
 	}
 };
 
-class Graph
+class GraphAL
 {
 public:
-	Graph(int v, bool isWeighted, bool isDirected);
-	~Graph();
+	GraphAL(int v, bool isWeighted, bool isDirected);
+	~GraphAL();
 
 	bool weighted;
 	bool directed;
