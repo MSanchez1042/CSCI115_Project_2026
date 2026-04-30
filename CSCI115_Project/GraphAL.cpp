@@ -1,6 +1,6 @@
-#include "Graph.h"
+#include "GraphAL.h"
 
-Graph::Graph(int v, bool isWeighted, bool isDirected)
+GraphAL::GraphAL(int v, bool isWeighted, bool isDirected)
 {
 	vertices = v;
 	weighted = isWeighted;
@@ -13,7 +13,7 @@ Graph::Graph(int v, bool isWeighted, bool isDirected)
 	}
 }
 
-Graph::~Graph()
+GraphAL::~GraphAL()
 {
 	for (int i = 0; i < vertices; i++)
 	{
@@ -29,7 +29,7 @@ Graph::~Graph()
 	delete[] adj;
 }
 
-bool Graph::edgeExists(int v1, int v2)
+bool GraphAL::edgeExists(int v1, int v2)
 {
 	// check if v1 and v2 are out of bounds
 	if (v1 < 0 || v1 >= vertices || v2 < 0 || v2 >= vertices)
@@ -47,7 +47,7 @@ bool Graph::edgeExists(int v1, int v2)
 	return false;
 }
 
-void Graph::addEdge(int v1, int v2, double w)
+void GraphAL::addEdge(int v1, int v2, double w)
 {
 	// check if v1 and v2 are out of bounds
 	if (v1 < 0 || v1 >= vertices || v2 < 0 || v2 >= vertices)
@@ -76,7 +76,7 @@ void Graph::addEdge(int v1, int v2, double w)
 	}
 }
 
-void Graph::removeEdge(int v1, int v2)
+void GraphAL::removeEdge(int v1, int v2)
 {
 	if (v1 < 0 || v1 >= vertices || v2 < 0 || v2 >= vertices)
 		return;
@@ -136,7 +136,7 @@ void Graph::removeEdge(int v1, int v2)
 	}
 }
 
-bool Graph::isConnected(int source)
+bool GraphAL::isConnected(int source)
 {
 	if (vertices == 0)
 		return true; // technically true
@@ -181,7 +181,7 @@ bool Graph::isConnected(int source)
 	return true;
 }
 
-void Graph::BFS(int source)
+void GraphAL::BFS(int source)
 {
 	if (source < 0 || source >= vertices)
 	{
@@ -230,7 +230,7 @@ void Graph::BFS(int source)
 	delete[] visited;
 }
 
-void Graph::displayAdjList()
+void GraphAL::displayAdjList()
 {
 	for (int i = 0; i < vertices; i++)
 	{
