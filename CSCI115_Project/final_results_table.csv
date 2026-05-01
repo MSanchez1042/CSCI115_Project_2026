@@ -1,0 +1,10 @@
+Vertices,Graph Type,Representation,Algorithm,Mean Runtime (ms),Standard Deviation (ms)
+100,Sparse Connected Undirected,Adjacency List,BFS,0.0811,0.0091
+100,Dense Fully Connected Undirected,Adjacency Matrix,BFS,0.1253,0.0431
+100,Dense Fully Connected Directed,Adjacency Matrix,Dijkstra,0.1802,0.0178
+500,Sparse Connected Undirected,Adjacency List,BFS,2.2522,1.9002
+500,Dense Fully Connected Undirected,Adjacency Matrix,BFS,2.5792,0.417
+500,Dense Fully Connected Directed,Adjacency Matrix,Dijkstra,3.5908,0.1483
+1000,Sparse Connected Undirected,Adjacency List,BFS,53.1912,11.7758
+1000,Dense Fully Connected Undirected,Adjacency Matrix,BFS,9.955,0.6345
+1000,Dense Fully Connected Directed,Adjacency Matrix,Dijkstra,17.4025,2.5862
