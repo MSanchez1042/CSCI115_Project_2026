@@ -51,7 +51,7 @@ table_image = ax.table(
     loc="center"
 )
 
-# ---------- Adjust Column Widths (PLACE HERE) ----------
+# ---------- Adjust Column Widths ----------
 table_image.scale(2.2, 1.5)
 
 col_widths = [0.10, 0.2, 0.18, 0.14, 0.20, 0.22]
