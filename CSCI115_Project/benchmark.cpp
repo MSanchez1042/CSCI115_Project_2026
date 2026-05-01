@@ -1,15 +1,15 @@
 #include "benchmark.h"
-
 #include <iostream>
 #include <fstream>
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
 
+//generates random weights
 double randomWeight(int minW, int maxW) {
     return minW + rand() % (maxW - minW + 1);
 }
-
+// creates a sparce connected graph using an adjacency list
 GraphAL* createSparseConnectedAL(int n, int minEdges, int maxEdges, int minW, int maxW) {
     GraphAL* g = new GraphAL(n, true, false);
 
@@ -37,6 +37,7 @@ GraphAL* createSparseConnectedAL(int n, int minEdges, int maxEdges, int minW, in
 
     return g;
 }
+//timing the BFS for the adjacancy list
 double timeGraphALBFS(GraphAL& g) {
     std::streambuf* oldCout = std::cout.rdbuf();
     std::ofstream nullOut("/dev/null");
@@ -50,6 +51,7 @@ double timeGraphALBFS(GraphAL& g) {
 
     return std::chrono::duration<double, std::milli>(end - start).count();
 }
+// computes the mean
 double computeMean(double* times, int trials) {
     double sum = 0.0;
 
@@ -59,7 +61,7 @@ double computeMean(double* times, int trials) {
 
     return sum / trials;
 }
-
+//computes the standard deviation
 double computeStdDev(double* times, int trials, double mean) {
     double sum = 0.0;
 
@@ -70,6 +72,7 @@ double computeStdDev(double* times, int trials, double mean) {
 
     return sqrt(sum / trials);
 }
+// runs the simulation for the sparse graph using bfs and retrieving the metrics
 BenchmarkStats benchmarkSparseListBFS(int n, int trials) {
     double* times = new double[trials];
 
@@ -95,6 +98,7 @@ BenchmarkStats benchmarkSparseListBFS(int n, int trials) {
 
     return result;
 }
+//this is timing the bfs for the matrix
 double timeMatrixBFS(myGraphM& g) {
     auto start = std::chrono::high_resolution_clock::now();
     g.BFS(0);
@@ -102,7 +106,7 @@ double timeMatrixBFS(myGraphM& g) {
 
     return std::chrono::duration<double, std::milli>(end - start).count();
 }
-
+//this is retrieving the metrixs for a dense graph with a matrix
 BenchmarkStats benchmarkDenseMatrixBFS(int n, int trials) {
     double* times = new double[trials];
 
@@ -128,6 +132,7 @@ BenchmarkStats benchmarkDenseMatrixBFS(int n, int trials) {
 
     return result;
 }
+//this is timing the matrix graph and using the Dijkstra algorithm to traverse
 double timeMatrixDijkstra(myGraphM& g) {
     auto start = std::chrono::high_resolution_clock::now();
 
@@ -143,7 +148,7 @@ double timeMatrixDijkstra(myGraphM& g) {
 
     return std::chrono::duration<double, std::milli>(end - start).count();
 }
-
+//this retrieves the metrix for the dense matrix using Dijksra
 BenchmarkStats benchmarkDenseMatrixDijkstra(int n, int trials) {
     double* times = new double[trials];
 
@@ -169,6 +174,7 @@ BenchmarkStats benchmarkDenseMatrixDijkstra(int n, int trials) {
 
     return result;
 }
+//this prints the headears for the csv file
 void writeCSVHeader(const char* filename) {
     std::ofstream fout(filename);
 
@@ -176,7 +182,7 @@ void writeCSVHeader(const char* filename) {
 
     fout.close();
 }
-
+//this retrieves the results and prints it to the csv file
 void appendCSV(const char* filename, const BenchmarkStats& result) {
     std::ofstream fout(filename, std::ios::app);
 
@@ -190,6 +196,7 @@ void appendCSV(const char* filename, const BenchmarkStats& result) {
 
     fout.close();
 }
+// this function runs all the benchmark functions and stores it in the csv file. 
 void runProjectBenchmarks() {
     const char* filename = "project_results.csv";
 
