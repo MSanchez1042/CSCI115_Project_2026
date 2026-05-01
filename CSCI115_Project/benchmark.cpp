@@ -197,7 +197,7 @@ void runProjectBenchmarks() {
 
     int sizes[] = {100, 500, 1000};
     int sizeCount = 3;
-    int trials = 10;
+    int trials = 30;
 
     for (int i = 0; i < sizeCount; i++) {
         int n = sizes[i];

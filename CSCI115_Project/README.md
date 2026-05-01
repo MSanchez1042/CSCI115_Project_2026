@@ -16,3 +16,9 @@ myMatrix.h - contains the matrix data structure and operation needed for the gra
 project.cpp - is the main file, it allows the runProjectsBenchmark() function to be ran and produce needed metrics.
 
 graphs.py - this file constructs the graphs needed for the documentation portion of the project.
+
+How to compile:
+g++ *.cpp -o project
+
+How to run:
+./project
