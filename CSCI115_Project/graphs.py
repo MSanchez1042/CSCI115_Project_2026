@@ -36,7 +36,6 @@ with open("final_results_table.txt", "w") as file:
     file.write(table.to_string(index=False))
 
 # ---------- Save Formatted Table as Image ----------
-
 fig, ax = plt.subplots(figsize=(12, 0.6 * len(table) + 1.5))
 ax.axis("off")
 
@@ -53,7 +52,6 @@ table_image = ax.table(
 )
 
 # ---------- Adjust Column Widths (PLACE HERE) ----------
-
 table_image.scale(2.2, 1.5)
 
 col_widths = [0.10, 0.2, 0.18, 0.14, 0.20, 0.22]
@@ -99,7 +97,6 @@ print("final_results_table.csv")
 print("final_results_table.txt")    
 
 # ---------- Bar Chart: Mean Runtime with Standard Deviation ----------
-
 df["label"] = (
     df["representation"] + "\n" +
     df["algorithm"] + "\n" +
@@ -125,7 +122,6 @@ plt.show()
 
 
 # ---------- Line Chart: Runtime Growth ----------
-
 groups = df.groupby(["representation", "algorithm", "graph_type"])
 
 plt.figure(figsize=(10, 6))
